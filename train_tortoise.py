@@ -197,7 +197,8 @@ class Trainer(object):
 
                 if self.step % self.save_freq == 0:
                     self.save()
-                    self.eval_model()
+                    # Eval won't work on Kaggle, as there is a problem with displaying tensorboard
+                    # self.eval_model()
 
                 self.step += 1
                 self.scheduler.step()
