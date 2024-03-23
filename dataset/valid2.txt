@@ -1,0 +1,9 @@
+./dataset/prepped_wavs/ljs_davis_172.wav|late in his life, in five sixty-seven, he invaded egypt.
+./dataset/prepped_wavs/ljs_davis_30.wav|where he waited till four p m, the time at which the queen and prince consort usually took an afternoon drive.
+./dataset/prepped_wavs/ljs_davis_32.wav|a short time later misses paine told her that someone had shot the president, quote, from the building in which lee is working, end quote.
+./dataset/prepped_wavs/ljs_davis_34.wav|nevertheless, she attempted to commit suicide by driving her nails, purposely left long, into her throat.
+./dataset/prepped_wavs/ljs_davis_35.wav|the stairs from one floor to the next are l-shaped, with both legs of the l approximately the same length.
+./dataset/prepped_wavs/ljs_davis_36.wav|in the territory of the secret service regional office which includes dallas and fort worth.
+./dataset/prepped_wavs/ljs_davis_38.wav|chief rowley testified that agents on duty in such a situation usually stay within the building during their relief,
+./dataset/prepped_wavs/ljs_davis_39.wav|he thought it contained tent poles, or possibly other camping equipment such as a folding shovel.
+./dataset/prepped_wavs/ljs_davis_40.wav|the man, bousfield, however, whose execution was so sadly bungled,
