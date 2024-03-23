@@ -12,7 +12,7 @@ from audio.injectors import TortoiseDiscreteTokenInjector, TorchMelSpectrogramIn
 from common.custom_dataset import GptDataset
 from text.text_tokenizer import TextBpeTokenizer
 from models.gpt.gpt import TortoiseVoice
-from ttts.gpt.voice_tokenizer import VoiceBpeTokenizer
+from text.voice_tokenizer import VoiceBpeTokenizer
 from utils.utils import latest_checkpoint_path, oldest_checkpoint_path, plot_spectrogram_to_numpy, summarize
 
 
