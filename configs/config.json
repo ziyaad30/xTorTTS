@@ -1,0 +1,129 @@
+{
+  "gpt_train": {
+    "train_file": "./dataset/train2.txt",
+    "valid_file": "./dataset/valid2.txt",
+    "mel_dir": "custom_mels",
+    "mel_normal_file": "custom_models/mel_norms.pth",
+    "logs_dir": "logs/custom_gpt",
+    "seed": 0,
+    "train_epochs": 100,
+    "val_freq": 100,
+    "save_freq": 50,
+    "keep_ckpts": 2,
+    "lr": 1e-4,
+    "text_weight": 0.01,
+    "mel_weight": 1.0,
+    "accum_grad": 1
+  },
+  "gpt_dataloader": {
+    "batch_size" : 2,
+    "shuffle": true,
+    "num_workers": 0,
+    "drop_last": false,
+    "pin_memory": false
+  },
+  "vae_train": {
+    "logs_dir": "logs/custom_dvae",
+    "pad_to_samples": 200,
+    "sample_rate": 22050,
+    "n_mels": 80,
+    "squeeze": false,
+    "total_epochs":1000,
+    "log_interval": 10,
+    "eval_interval": 100,
+    "save_freq": 500,
+    "keep_ckpts": 5,
+    "lr": 1e-4
+  },
+  "vae_dataloader": {
+    "batch_size" : 16,
+    "shuffle": true,
+    "num_workers" : 0,
+    "drop_last": true,
+    "pin_memory": false
+  },
+  "diffusion_train": {
+    "train_steps": 1000000,
+    "val_freq": 50,
+    "save_freq": 100,
+    "keep_ckpts": 3,
+    "lr": 1e-4,
+    "logs_dir": "logs/diffusion",
+    "accumulate_num": 1,
+    "unconditioned_percentage": 0.1,
+    "timesteps": 1000
+  },
+  "diffusion_dataloader": {
+    "batch_size": 2,
+    "shuffle": false,
+    "num_workers" : 0,
+    "drop_last": false,
+    "pin_memory": false
+  },
+  "diffusion": {
+    "model_channels": 512,
+    "num_layers": 10,
+    "in_channels": 100,
+    "out_channels": 200,
+    "in_latent_channels": 1024,
+    "in_tokens": 8193,
+    "dropout": 0,
+    "use_fp16": false,
+    "num_heads": 16,
+    "layer_drop": 0.2,
+    "unconditioned_percentage": 0.15
+  },
+  "base_diffusion": {
+    "in_channels": 100,
+    "out_channels": 200,
+    "model_channels": 512,
+    "attention_resolutions": [ 4, 2, 1 ],
+    "num_res_blocks": 2,
+    "channel_mult": [ 1, 1 ],
+    "num_heads": 8,
+    "use_spatial_transformer": true,
+    "transformer_depth": 1,
+    "context_dim": 512,
+    "use_checkpoint": true,
+    "dims": 1,
+    "legacy": false
+  },
+  "refer_diffusion": {
+    "in_channels": 100,
+    "out_channels": 200,
+    "model_channels": 512,
+    "attention_resolutions": [ 4, 2, 1 ],
+    "num_res_blocks": 2,
+    "channel_mult": [ 1, 1],
+    "num_heads": 8,
+    "use_spatial_transformer": true,
+    "transformer_depth": 1,
+    "context_dim": 512,
+    "use_checkpoint": true,
+    "legacy": false
+  },
+  "clip": {
+    "embed_dim": 512,
+    "vision_cfg": {
+      "layers": 6,
+      "width": 512,
+      "head_width": 64,
+      "mlp_ratio": 4.0,
+      "patch_dropout": 0.4,
+      "attentional_pool": false,
+      "patch_size": 32,
+      "image_size": 1000,
+      "in_channels": 100,
+      "pool_type": "tok",
+      "pos_embed_type": "learnable",
+      "final_ln_after_pool": false
+    }
+  },
+  "mrte": {
+    "mel_channels" : 100,
+    "semantic_channels" : 1024,
+    "model_channels" : 512,
+    "out_channels" : 1024,
+    "num_heads" : 4
+  }
+}
