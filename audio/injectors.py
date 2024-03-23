@@ -1,6 +1,6 @@
 import torch
 import torchaudio
-from tortoise.dvae import DiscreteVAE
+from models.dvae.dvae import DiscreteVAE
 
 
 def safe_log(x: torch.Tensor, clip_val: float = 1e-7) -> torch.Tensor:
