@@ -11,7 +11,7 @@ from torch.utils.tensorboard import SummaryWriter
 from audio.injectors import TortoiseDiscreteTokenInjector, TorchMelSpectrogramInjector
 from common.custom_dataset import GptDataset
 from text.text_tokenizer import TextBpeTokenizer
-from tortoise.my_gpt import TortoiseVoice
+from models.gpt.gpt import TortoiseVoice
 from ttts.gpt.voice_tokenizer import VoiceBpeTokenizer
 from utils.utils import latest_checkpoint_path, oldest_checkpoint_path, plot_spectrogram_to_numpy, summarize
 
