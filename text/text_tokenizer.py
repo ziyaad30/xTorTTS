@@ -1,6 +1,7 @@
 import re
 import string
 
+import nltk
 import torch
 
 from text.cleaners import arpa_cleaners
@@ -8,7 +9,7 @@ from text.cleaners import arpa_cleaners
 valid_symbols = [
     "[STOP]",
     "[UNK]",
-    "[SPACE]",
+    " ",
     "!",
     "'",
     "(",
@@ -149,15 +150,14 @@ def text_to_sequence(text):
                 for p in pronunciation:
                     try:
                         sequence += _arpabet_to_sequence(p)
-                    except (Exception,):
+                    except:
                         sequence += _arpabet_to_sequence('[UNK]')
                 break
 
         if not found:
             if phn not in string.punctuation:
                 if phn == ' ':
-                    # sequence += _symbols_to_sequence(' ')
-                    sequence += _arpabet_to_sequence('[SPACE]')
+                    sequence += _symbols_to_sequence(' ')
                 else:
                     # Remove brackets if not word stress
                     if str(phn).__contains__('(') or str(phn).__contains__(')'):
@@ -176,7 +176,7 @@ def text_to_sequence(text):
 
                     # this shouldn't happen
                     elif str(phn).__contains__('.'):
-                        print(f'fullstop found in {phn}')
+                        print(f'stop found in {phn}')
                         with open(f"unknown.txt", 'a', encoding='utf-8') as f:
                             f.write(phn + '\n')
                         phn = phn.replace('.', '')
@@ -217,7 +217,6 @@ class TextBpeTokenizer:
         if isinstance(seq, torch.Tensor):
             seq = seq.cpu().numpy()
         txt = sequence_to_text(seq)
-        txt = txt.replace('[SPACE]', ' ')
         txt = txt.replace('[STOP]', '')
         txt = txt.replace('[UNK]', '')
         return txt
@@ -229,7 +228,7 @@ class TextBpeTokenizer:
 if __name__ == '__main__':
     tokenizer = TextBpeTokenizer()
 
-    ids = tokenizer.encode("The(2) model (sounds) really good and above all, it's reasonably fast.")
+    ids = tokenizer.encode("This model sounds really good and above all, it's reasonably fast.")
     print(ids)
     print(tokenizer.decode(ids))
 
