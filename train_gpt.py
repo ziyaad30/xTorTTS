@@ -12,7 +12,7 @@ from audio.injectors import TortoiseDiscreteTokenInjector, TorchMelSpectrogramIn
 from common.custom_dataset import GptDataset
 from text.text_tokenizer import TextBpeTokenizer
 from models.gpt.gpt import TortoiseVoice
-from text.voice_tokenizer import VoiceBpeTokenizer
+# from text.voice_tokenizer import VoiceBpeTokenizer
 from utils.utils import latest_checkpoint_path, oldest_checkpoint_path, plot_spectrogram_to_numpy, summarize
 
 
@@ -35,7 +35,7 @@ class Trainer(object):
         self.inj = TorchMelSpectrogramInjector({'in': 'wav', 'out': 'mel'}, power=1)  # power=1 for visual mel-spec
 
         # TODO: try using my own TextBpeTokenizer based on cmudict
-        self.tokenizer = VoiceBpeTokenizer()
+        self.tokenizer = TextBpeTokenizer()
 
         self.gpt = TortoiseVoice(
             model_dim=1024,
@@ -160,25 +160,26 @@ class Trainer(object):
                 lr = self.scheduler.get_last_lr()[0]
 
                 t = time.time() - start_time
-                print()
-                print(f'[Epoch: {self.epoch} | '
-                      f'Iteration: {idx + 1}/{len(self.dataloader)} | {100. * (idx + 1) / len(self.dataloader):.2f}% | '
-                      f'{t:.2f}s/it]')
-
-                print(
-                    'Step: {}, '
-                    'loss_text_ce: {:.7f}, '
-                    'loss_mel_ce: {:.7f}, '
-                    'total_loss: {:.7f}, '
-                    'grad_norm: {:.7f}, '
-                    'lr: {:.7f}'
-                    .format(
-                        self.step, loss_dict["loss_text_ce"], loss_dict["loss_mel_ce"],
-                        loss_dict["loss"],
-                        grad_norm,
-                        lr
+                if self.step % 50 == 0:
+                    print()
+                    print(f'[Epoch: {self.epoch} | '
+                          f'Iteration: {idx + 1}/{len(self.dataloader)} | {100. * (idx + 1) / len(self.dataloader):.2f}% | '
+                          f'{t:.2f}s/it]')
+    
+                    print(
+                        'Step: {}, '
+                        'loss_text_ce: {:.7f}, '
+                        'loss_mel_ce: {:.7f}, '
+                        'total_loss: {:.7f}, '
+                        'grad_norm: {:.7f}, '
+                        'lr: {:.7f}'
+                        .format(
+                            self.step, loss_dict["loss_text_ce"], loss_dict["loss_mel_ce"],
+                            loss_dict["loss"],
+                            grad_norm,
+                            lr
+                        )
                     )
-                )
 
                 if self.step % self.val_freq == 0:
                     scalar_dict = {
