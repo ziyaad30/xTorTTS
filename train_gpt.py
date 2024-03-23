@@ -44,7 +44,7 @@ class Trainer(object):
             max_mel_tokens=604,
             max_text_tokens=402,
             heads=16,
-            layers=15,
+            layers=30,
             number_text_tokens=self.tokenizer.vocab_size(),
             start_text_token=self.tokenizer.vocab_size(),
             train_solo_embeddings=False,
