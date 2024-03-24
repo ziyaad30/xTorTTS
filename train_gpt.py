@@ -184,7 +184,7 @@ class Trainer(object):
 
                 t = time.time() - start_time
 
-                if self.step % 5 == 0:
+                if self.step % 25 == 0:
                     print(f'[Epoch: {self.epoch}, '
                           f'Iteration: {idx + 1}/{len(self.dataloader)} - {100. * (idx + 1) / len(self.dataloader):.2f}%]')
     
