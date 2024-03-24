@@ -2,12 +2,11 @@
   "gpt_train": {
     "train_file": "./dataset/train2.txt",
     "valid_file": "./dataset/valid2.txt",
-    "mel_dir": "custom_mels",
-    "mel_normal_file": "original_models/mel_norms.pth",
-    "logs_dir": "logs/custom_gpt",
+    "mel_dir": "mels_100",
+    "logs_dir": "logs/gptt_100",
     "seed": 0,
-    "train_epochs": 100,
-    "val_freq": 1000,
+    "train_epochs": 200,
+    "val_freq": 100,
     "save_freq": 500,
     "keep_ckpts": 1,
     "lr": 1e-4,
@@ -16,39 +15,41 @@
     "accum_grad": 1
   },
   "gpt_dataloader": {
-    "batch_size" : 4,
+    "batch_size" : 2,
     "shuffle": true,
     "num_workers": 0,
     "drop_last": false,
     "pin_memory": false
   },
   "vae_train": {
-    "logs_dir": "logs/custom_dvae",
+    "logs_dir": "logs/dvae_100",
     "pad_to_samples": 200,
-    "sample_rate": 22050,
-    "n_mels": 80,
+    "sample_rate": 24000,
+    "n_mels": 100,
     "squeeze": false,
-    "total_epochs":1000,
+    "train_epochs":1000,
     "log_interval": 10,
     "eval_interval": 100,
     "save_freq": 500,
     "keep_ckpts": 5,
-    "lr": 1e-4
+    "lr": 1e-4,
+    "power": 1,
+    "mel_fmax": 12000
   },
   "vae_dataloader": {
     "batch_size" : 16,
     "shuffle": true,
     "num_workers" : 0,
-    "drop_last": true,
+    "drop_last": false,
     "pin_memory": false
   },
   "diffusion_train": {
-    "train_steps": 1000000,
+    "train_epochs": 1000,
     "val_freq": 50,
     "save_freq": 100,
     "keep_ckpts": 3,
     "lr": 1e-4,
-    "logs_dir": "logs/diffusion",
+    "logs_dir": "logs/diffusion2",
     "accumulate_num": 1,
     "unconditioned_percentage": 0.1,
     "timesteps": 1000
