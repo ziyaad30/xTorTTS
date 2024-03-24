@@ -3,7 +3,7 @@
     "train_file": "./dataset/train2.txt",
     "valid_file": "./dataset/valid2.txt",
     "mel_dir": "custom_mels",
-    "mel_normal_file": "custom_models/mel_norms.pth",
+    "mel_normal_file": "original_models/mel_norms.pth",
     "logs_dir": "logs/custom_gpt",
     "seed": 0,
     "train_epochs": 100,
