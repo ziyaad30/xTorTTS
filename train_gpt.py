@@ -69,7 +69,7 @@ class Trainer(object):
             checkpointing=True
         )
 
-        hifigan_checkpoint = torch.load('pretrained_models/hifigan_decoder.pth', map_location=torch.device("cpu"))
+        hifigan_checkpoint = torch.load('original_models/hifigan_decoder.pth', map_location=torch.device("cpu"))
         self.gpt.hifigan_decoder.load_state_dict(hifigan_checkpoint["model"], strict=True)
 
         dvae_model_path = latest_checkpoint_path(self.cfg['vae_train']['logs_dir'], f"dvae_[0-9]*")
