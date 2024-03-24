@@ -10,9 +10,9 @@ from torch.utils.tensorboard import SummaryWriter
 
 from audio.injectors import TortoiseDiscreteTokenInjector, TorchMelSpectrogramInjector
 from common.custom_dataset import GptDataset
-from text.text_tokenizer import TextBpeTokenizer
+# from text.text_tokenizer import TextBpeTokenizer
 from models.gpt.gpt import TortoiseVoice
-# from text.voice_tokenizer import VoiceBpeTokenizer
+from text.voice_tokenizer import VoiceBpeTokenizer
 from utils.utils import latest_checkpoint_path, oldest_checkpoint_path, plot_spectrogram_to_numpy, summarize
 
 
@@ -35,7 +35,7 @@ class Trainer(object):
         self.inj = TorchMelSpectrogramInjector({'in': 'wav', 'out': 'mel'}, power=1)  # power=1 for visual mel-spec
 
         # TODO: try using my own TextBpeTokenizer based on cmudict
-        self.tokenizer = TextBpeTokenizer()
+        self.tokenizer = VoiceBpeTokenizer()
 
         self.gpt = TortoiseVoice(
             model_dim=1024,
