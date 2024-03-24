@@ -16,7 +16,7 @@ from models.gpt.gpt import TortoiseVoice
 from text.text_tokenizer import TextBpeTokenizer
 from text.voice_tokenizer import VoiceBpeTokenizer
 from utils.utils import latest_checkpoint_path, oldest_checkpoint_path, summarize, plot_spectrogram_to_numpy
-from vocoder.vocos import Vocos
+# from vocoder.vocos import Vocos
 
 
 def warmup(step):
@@ -30,11 +30,11 @@ class Trainer(object):
     def __init__(self, cfg_path='configs/config.json'):
         self.cfg = json.load(open(cfg_path))
 
-        cond_audio = 'dataset/prepped_wavs/ljs_davis_2003.wav'
-        audio, sr = torchaudio.load(cond_audio)
-        if audio.shape[0] > 1:
-            audio = audio[0].unsqueeze(0)
-        self.ref_speaker = torchaudio.transforms.Resample(sr, 24000)(audio)
+        # cond_audio = 'dataset/prepped_wavs/ljs_davis_2003.wav'
+        # audio, sr = torchaudio.load(cond_audio)
+        # if audio.shape[0] > 1:
+        #     audio = audio[0].unsqueeze(0)
+        # self.ref_speaker = torchaudio.transforms.Resample(sr, 24000)(audio)
 
         self.sample_rate = self.cfg['vae_train']['sample_rate']
         self.n_mels = self.cfg['vae_train']['n_mels']
@@ -48,8 +48,8 @@ class Trainer(object):
                                                       mel_fmax=self.mel_fmax)
         self.conditioning = self.mel_inj({'wav': self.ref_speaker.unsqueeze(0)})['mel'].to('cuda')
 
-        self.vocos = Vocos.from_pretrained('pretrained_models/pytorch_model.bin',
-                                           'vocoder/config.yaml').to('cuda')
+        # self.vocos = Vocos.from_pretrained('pretrained_models/pytorch_model.bin',
+        #                                   'vocoder/config.yaml').to('cuda')
 
         self.tokenizer = TextBpeTokenizer()
 
@@ -273,16 +273,16 @@ class Trainer(object):
         wav_out = self.gpt.hifigan_decoder(latent, g=speaker_embedding).detach().cpu()
         hifi_mel = self.mel_inj({'wav': wav_out})['mel']
         dvae_mel = self.code_mel({'codes': codes[:, :-1]})['mel'][0]
-        audio = self.vocos.decode(dvae_mel)
+        # audio = self.vocos.decode(dvae_mel)
 
         with torch.no_grad():
             image_dict = {
                 "gpt_mel/hifi": plot_spectrogram_to_numpy(hifi_mel[0, :, :].detach().unsqueeze(-1).cpu()),
-                "gpt_mel/vocos": plot_spectrogram_to_numpy(dvae_mel[0, :, :].detach().unsqueeze(-1).cpu()),
+                # "gpt_mel/vocos": plot_spectrogram_to_numpy(dvae_mel[0, :, :].detach().unsqueeze(-1).cpu()),
             }
             audios_dict = {
                 "gpt_audio/hifi": wav_out,
-                "gpt_audio/vocos": audio,
+                # "gpt_audio/vocos": audio,
             }
 
             summarize(
