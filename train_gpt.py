@@ -46,7 +46,7 @@ class Trainer(object):
                                                       n_mel_channels=self.n_mels,
                                                       sampling_rate=self.sample_rate,
                                                       mel_fmax=self.mel_fmax)
-        self.conditioning = self.mel_inj({'wav': self.ref_speaker.unsqueeze(0)})['mel'].to('cuda')
+        # self.conditioning = self.mel_inj({'wav': self.ref_speaker.unsqueeze(0)})['mel'].to('cuda')
 
         # self.vocos = Vocos.from_pretrained('pretrained_models/pytorch_model.bin',
         #                                   'vocoder/config.yaml').to('cuda')
