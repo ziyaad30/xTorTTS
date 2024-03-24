@@ -220,10 +220,6 @@ class Trainer(object):
                         scalars=scalar_dict
                     )
 
-                if self.step == 1:
-                    print(f'Evaluating on step: {self.step}')
-                    self.eval_model()
-
                 if self.step % self.save_freq == 0:
                     self.save()
                     # print('Evaluating...')
