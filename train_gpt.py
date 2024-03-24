@@ -184,25 +184,26 @@ class Trainer(object):
 
                 t = time.time() - start_time
 
-                print(f'[Epoch: {self.epoch}, '
-                      f'Iteration: {idx + 1}/{len(self.dataloader)} - {100. * (idx + 1) / len(self.dataloader):.2f}%]')
-
-                print(
-                    'Step: {}, '
-                    'loss_text_ce: {:.7f}, '
-                    'loss_mel_ce: {:.7f}, '
-                    'total_loss: {:.7f}, '
-                    'grad_norm: {:.7f}, '
-                    'lr: {:.7f}, '
-                    '{:.2f}s/it'
-                    .format(
-                        self.step, loss_dict["loss_text_ce"], loss_dict["loss_mel_ce"],
-                        loss_dict["loss"],
-                        grad_norm,
-                        lr,
-                        t
+                if self.step % 50 == 0:
+                    print(f'[Epoch: {self.epoch}, '
+                          f'Iteration: {idx + 1}/{len(self.dataloader)} - {100. * (idx + 1) / len(self.dataloader):.2f}%]')
+    
+                    print(
+                        'Step: {}, '
+                        'loss_text_ce: {:.7f}, '
+                        'loss_mel_ce: {:.7f}, '
+                        'total_loss: {:.7f}, '
+                        'grad_norm: {:.7f}, '
+                        'lr: {:.7f}, '
+                        '{:.2f}s/it'
+                        .format(
+                            self.step, loss_dict["loss_text_ce"], loss_dict["loss_mel_ce"],
+                            loss_dict["loss"],
+                            grad_norm,
+                            lr,
+                            t
+                        )
                     )
-                )
 
                 if self.step % self.val_freq == 0:
                     scalar_dict = {
@@ -225,8 +226,8 @@ class Trainer(object):
 
                 if self.step % self.save_freq == 0:
                     self.save()
-                    print('Evaluating...')
-                    self.eval_model()
+                    # print('Evaluating...')
+                    # self.eval_model()
 
                 self.step += 1
                 self.scheduler.step()
